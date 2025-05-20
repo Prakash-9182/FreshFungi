@@ -83,6 +83,26 @@
       background-color: #45a049;
     }
 
+    #contact {
+      padding: 2rem;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    #contact form {
+      max-width: 500px;
+      margin: auto;
+    }
+
+    #contact input, #contact textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -103,8 +123,7 @@
   <nav>
     <a href="#">Home</a>
     <a href="#products">Products</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <!-- Products Section -->
@@ -141,10 +160,23 @@
     </div>
   </section>
 
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Have questions or want to place a custom order? Send us a message!</p>
+    <form action="https://formspree.io/f/meogdldl" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
+      <button type="submit" class="buy-btn">Send Message</button>
+    </form>
+  </section>
+
   <footer>
     <p>&copy; 2025 FreshFungi. All rights reserved.</p>
   </footer>
 
 </body>
 </html>
+
 
