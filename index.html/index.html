@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FreshFungi - Mushroom Store</title>
   <style>
+<div id="cart-modal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, -20%);
+  background:#fff; border:2px solid #4CAF50; padding:20px; z-index:1000;">
+  <h3>Your Cart</h3>
+  <ul id="cart-items"></ul>
+  <strong>Total: ₹<span id="modal-total">0</span></strong><br><br>
+  <button onclick="checkout()">Checkout</button>
+  <button onclick="hideCart()">Close</button>
+</div>   
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -112,6 +120,7 @@
     }
   </style>
 </head>
+  
 <body>
 
   <header>
@@ -119,6 +128,10 @@
   <h1>FreshFungi - Mushroom Store</h1>
 </header>
 
+<div id="cart-summary" style="text-align:right; padding: 10px;">
+  🛒 Items in Cart: <span id="cart-count">0</span> | Total: ₹<span id="cart-total">0</span>
+  <button onclick="showCart()">View Cart</button>
+</div>
 
 
   <!-- Navigation Bar -->
@@ -189,7 +202,43 @@
   <footer>
     <p>&copy; 2025 FreshFungi. All rights reserved.</p>
   </footer>
+<script>
+  let cart = [];
+  let total = 0;
 
+  function addToCart(item, price) {
+    cart.push({ item, price });
+    total += price;
+    updateCartDisplay();
+  }
+
+  function updateCartDisplay() {
+    document.getElementById('cart-count').innerText = cart.length;
+    document.getElementById('cart-total').innerText = total;
+  }
+
+  function showCart() {
+    const cartList = document.getElementById('cart-items');
+    cartList.innerHTML = '';
+    cart.forEach(entry => {
+      const li = document.createElement('li');
+      li.innerText = `${entry.item} - ₹${entry.price}`;
+      cartList.appendChild(li);
+    });
+    document.getElementById('modal-total').innerText = total;
+    document.getElementById('cart-modal').style.display = 'block';
+  }
+
+  function hideCart() {
+    document.getElementById('cart-modal').style.display = 'none';
+  }
+
+  function checkout() {
+    alert("Checkout is under development 🚧");
+  }
+</script>
+
+  
 </body>
 </html>
 
