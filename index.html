@@ -52,6 +52,17 @@
 .product:hover {
   transform: translateY(-5px);
 }
+.product img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+}
+.product:hover {
+  transform: translateY(-5px);
+}
 
     }
     .product img {
@@ -60,12 +71,18 @@
       object-fit: cover;
       border-radius: 8px;
     }
-    .product h3 { margin: 0.5rem 0; }
-    .product p { margin: 0.3rem 0; }
     .product button {
-  border-radius: 25px;
-  padding: 0.6rem 1.2rem;
-  font-weight: bold;
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.product button:hover {
+  background-color: #45a049;
+}
+
 }
 
     }
@@ -111,13 +128,14 @@
 </head>
 <body>
 
-<header style="display: flex; align-items: center; gap: 1rem; background: #4CAF50; color: white; padding: 1rem 2rem;">
-  <img src="logo_freshfungi_final.png" alt="FreshFungi Logo" style="height: 70px; border-radius: 8px;">
+<header>
+  <img src="logo_freshfungi_final.png" alt="FreshFungi Logo">
   <div>
-    <h1 style="margin: 0; font-size: 2rem;">FreshFungi</h1>
-    <p style="margin: 0;">Fresh & Organic Mushrooms Delivered to Your Doorstep</p>
+    <h1>FreshFungi</h1>
+    <p>Fresh & Organic Mushrooms Delivered to Your Doorstep</p>
   </div>
 </header>
+
 
 
   <nav>
