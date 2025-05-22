@@ -17,16 +17,31 @@
 
     /* ----------  HEADER ---------- */
     header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      background: #4caf50;
-      color: #fff;
-      padding: 1rem 2rem;
-    }
-    header img { height: 70px; }
-    header h1 { margin: 0; font-size: 2rem; }
-    header p  { margin: 0; font-size: 0.9rem; }
+  background: #4CAF50;
+  padding: 1rem 0;
+  text-align: center;
+}
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+header img {
+  height: 80px;
+  border-radius: 20px; /* Makes it a curved square */
+  margin-bottom: 0.5rem;
+}
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: white;
+}
+header p {
+  margin: 0;
+  color: #f1f1f1;
+}
+
 
     /* ----------  NAVBAR ---------- */
     nav {
@@ -85,14 +100,19 @@
 
     /* ----------  ADD-TO-CART BUTTON (rectangular, no radius) ---------- */
     .product button {
-      background: #4caf50;
-      color: #fff;
-      padding: 10px 18px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
-    .product button:hover { background: #45a049; }
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px; /* Curved corners */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.product button:hover {
+  background-color: #45a049;
+}
+
 
     /* ----------  CART MODAL ---------- */
     #cart-modal {
@@ -139,12 +159,16 @@
 <body>
   <!-- ----------  HEADER ---------- -->
   <header>
+  <div class="header-container">
     <img src="logo_freshfungi_final.png" alt="FreshFungi Logo" />
     <div>
       <h1>FreshFungi</h1>
       <p>Fresh & Organic Mushrooms Delivered to Your Doorstep</p>
     </div>
-  </header>
+  </div>
+</header>
+
+
 
   <!-- ----------  NAVBAR ---------- -->
   <nav>
