@@ -1,38 +1,62 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FreshFungi - Mushroom Store</title>
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
-    header {
-      background: #4CAF50; color: white; padding: 1rem;
-      display: flex; align-items: center; justify-content: center; gap: 1rem;
+    /* ----------  GLOBAL ---------- */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
     }
-    header img { height: 60px; }
-    header h1 { margin: 0; }
+
+    /* ----------  HEADER ---------- */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #4caf50;
+      color: #fff;
+      padding: 1rem 2rem;
+    }
+    header img { height: 70px; }
+    header h1 { margin: 0; font-size: 2rem; }
+    header p  { margin: 0; font-size: 0.9rem; }
+
+    /* ----------  NAVBAR ---------- */
     nav {
-      background-color: #388e3c;
+      background: #2e7d32;
       display: flex;
       justify-content: center;
       gap: 2rem;
-      padding: 0.7rem;
+      padding: 0.8rem;
     }
     nav a {
-      color: white;
+      color: #fff;
       text-decoration: none;
       font-weight: bold;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
+    nav a:hover { text-decoration: underline; }
+
+    /* ----------  CART SUMMARY ---------- */
     #cart-summary {
       text-align: right;
-      padding: 10px;
+      padding: 10px 1.5rem;
       background: #eafbe7;
+      font-size: 0.95rem;
     }
+    #cart-summary button {
+      margin-left: 8px;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+
+    /* ----------  PRODUCTS GRID ---------- */
     .products {
       display: flex;
       flex-wrap: wrap;
@@ -40,27 +64,37 @@
       padding: 2rem;
     }
     .product {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
       margin: 1rem;
       padding: 1rem;
       width: 250px;
       text-align: center;
+      transition: transform 0.15s;
     }
+    .product:hover { transform: translateY(-4px); }
     .product img {
       width: 100%;
       height: 180px;
       object-fit: cover;
       border-radius: 8px;
     }
-    .product h3 { margin: 0.5rem 0; }
-    .product p { margin: 0.3rem 0; }
+    .product h3 { margin: 0.6rem 0 0.3rem; }
+    .product p  { margin: 0.25rem 0 0.8rem; }
+
+    /* ----------  ADD-TO-CART BUTTON (rectangular, no radius) ---------- */
     .product button {
-      background-color: #4CAF50; color: white; padding: 0.5rem 1rem;
-      border: none; border-radius: 5px; cursor: pointer;
+      background: #4caf50;
+      color: #fff;
+      padding: 10px 18px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
     }
-    .product button:hover { background-color: #45a049; }
+    .product button:hover { background: #45a049; }
+
+    /* ----------  CART MODAL ---------- */
     #cart-modal {
       display: none;
       position: fixed;
@@ -68,48 +102,51 @@
       left: 50%;
       transform: translate(-50%, -20%);
       background: #fff;
-      border: 2px solid #4CAF50;
+      border: 2px solid #4caf50;
       padding: 20px;
       z-index: 1000;
+      max-width: 320px;
+      width: 90%;
     }
-    section#about, section#contact {
-      padding: 2rem;
-      text-align: center;
-    }
-    #about {
-      background-color: #e8f5e9;
-    }
+
+    /* ----------  ABOUT & CONTACT ---------- */
+    section#about { background: #e8f5e9; padding: 2rem; text-align: center; }
+    section#contact{ padding: 2rem; text-align: center; }
     #contact form {
-      max-width: 500px;
-      margin: auto;
+      max-width: 500px; margin: auto;
     }
     #contact input, #contact textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin: 0.5rem 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
+      width: 100%; padding: 0.6rem; margin: 0.4rem 0;
+      border: 1px solid #ccc; border-radius: 5px;
     }
+    #contact button {
+      background: #4caf50; color: #fff;
+      padding: 0.7rem 1.4rem; border: none; cursor: pointer;
+    }
+    #contact button:hover { background: #45a049; }
+
+    /* ----------  FOOTER ---------- */
     footer {
       text-align: center;
       padding: 1rem;
-      background-color: #333;
-      color: white;
+      background: #333;
+      color: #fff;
       margin-top: 2rem;
     }
   </style>
 </head>
-<body>
 
+<body>
+  <!-- ----------  HEADER ---------- -->
   <header>
-    <img src="logo_freshfungi_final.png" alt="FreshFungi Logo">
+    <img src="logo_freshfungi_final.png" alt="FreshFungi Logo" />
     <div>
       <h1>FreshFungi</h1>
       <p>Fresh & Organic Mushrooms Delivered to Your Doorstep</p>
     </div>
   </header>
 
+  <!-- ----------  NAVBAR ---------- -->
   <nav>
     <a href="#">Home</a>
     <a href="#products">Products</a>
@@ -117,77 +154,91 @@
     <a href="#contact">Contact</a>
   </nav>
 
+  <!-- ----------  CART SUMMARY ---------- -->
   <div id="cart-summary">
-    🛒 Items in Cart: <span id="cart-count">0</span> | Total: ₹<span id="cart-total">0</span>
+    🛒 Items in Cart: <span id="cart-count">0</span> |
+    Total: ₹<span id="cart-total">0</span>
     <button onclick="showCart()">View Cart</button>
   </div>
 
+  <!-- ----------  PRODUCT GRID ---------- -->
   <section class="products" id="products">
+    <!-- Button -->
     <div class="product">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Button_mushroom.jpg" alt="Button Mushrooms">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Button_mushroom.jpg" alt="Button Mushrooms" />
       <h3>Button Mushrooms</h3>
       <p>₹60 / 250g</p>
       <button onclick="addToCart('Button Mushrooms', 60)">Add to Cart</button>
     </div>
+
     <div class="product">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Pleurotus_ostreatus_JPG1.jpg" alt="Oyster Mushrooms">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Pleurotus_ostreatus_JPG1.jpg" alt="Oyster Mushrooms" />
       <h3>Oyster Mushrooms</h3>
       <p>₹70 / 250g</p>
       <button onclick="addToCart('Oyster Mushrooms', 70)">Add to Cart</button>
     </div>
+
     <div class="product">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Shiitake_mushroom.jpg" alt="Shiitake Mushrooms">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Shiitake_mushroom.jpg" alt="Shiitake Mushrooms" />
       <h3>Shiitake Mushrooms</h3>
       <p>₹90 / 250g</p>
       <button onclick="addToCart('Shiitake Mushrooms', 90)">Add to Cart</button>
     </div>
+
     <div class="product">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Calocybe_indica.jpg" alt="Milky Mushrooms">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Calocybe_indica.jpg" alt="Milky Mushrooms" />
       <h3>Milky Mushrooms</h3>
       <p>₹80 / 250g</p>
       <button onclick="addToCart('Milky Mushrooms', 80)">Add to Cart</button>
     </div>
+
     <div class="product">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Hericium_erinaceus_Iowa_2.jpg" alt="Lion's Mane">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Hericium_erinaceus_Iowa_2.jpg" alt="Lion’s Mane" />
       <h3>Lion’s Mane</h3>
       <p>₹120 / 250g</p>
       <button onclick="addToCart('Lion’s Mane', 120)">Add to Cart</button>
     </div>
   </section>
 
+  <!-- ----------  CART MODAL ---------- -->
   <div id="cart-modal">
     <h3>Your Cart</h3>
     <ul id="cart-items"></ul>
-    <strong>Total: ₹<span id="modal-total">0</span></strong><br><br>
+    <strong>Total: ₹<span id="modal-total">0</span></strong><br /><br />
     <button onclick="checkout()">Checkout</button>
     <button onclick="hideCart()">Close</button>
   </div>
 
+  <!-- ----------  ABOUT SECTION ---------- -->
   <section id="about">
     <h2>About Us</h2>
-    <p style="max-width: 700px; margin: auto; font-size: 1.1rem;">
-      At <strong>FreshFungi</strong>, we are passionate about delivering fresh, organic mushrooms directly from our farm to your kitchen.
-      Based in Hyderabad, we specialize in cultivating high-quality varieties like Button, Oyster, Shiitake, and Lion’s Mane.
-      We believe in sustainable farming and support healthy living through nutritious, chemical-free produce.
-      Thank you for supporting local farming!
+    <p style="max-width: 700px; margin: auto; font-size: 1.05rem;">
+      At <strong>FreshFungi</strong> we’re passionate about delivering fresh,
+      organic mushrooms straight from our farm to your kitchen. Based in
+      Hyderabad, we specialize in cultivating high-quality varieties like
+      Button, Oyster, Shiitake, and Lion’s Mane. We believe in sustainable
+      farming and healthy living. Thanks for supporting local produce!
     </p>
   </section>
 
+  <!-- ----------  CONTACT SECTION ---------- -->
   <section id="contact">
     <h2>Contact Us</h2>
-    <p>Have questions or want to place a custom order? Send us a message!</p>
+    <p>Have questions or want to place a bulk order? Send us a message!</p>
     <form action="https://formspree.io/f/meogdldl" method="POST">
       <input type="text" name="name" placeholder="Your Name" required />
       <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </section>
 
+  <!-- ----------  FOOTER ---------- -->
   <footer>
     <p>&copy; 2025 FreshFungi. All rights reserved.</p>
   </footer>
 
+  <!-- ----------  JS CART LOGIC ---------- -->
   <script>
     let cart = [];
     let total = 0;
@@ -199,30 +250,29 @@
     }
 
     function updateCartDisplay() {
-      document.getElementById('cart-count').innerText = cart.length;
-      document.getElementById('cart-total').innerText = total;
+      document.getElementById("cart-count").innerText = cart.length;
+      document.getElementById("cart-total").innerText = total;
     }
 
     function showCart() {
-      const cartList = document.getElementById('cart-items');
-      cartList.innerHTML = '';
-      cart.forEach(entry => {
-        const li = document.createElement('li');
-        li.innerText = `${entry.item} - ₹${entry.price}`;
+      const cartList = document.getElementById("cart-items");
+      cartList.innerHTML = "";
+      cart.forEach((entry) => {
+        const li = document.createElement("li");
+        li.textContent = `${entry.item} - ₹${entry.price}`;
         cartList.appendChild(li);
       });
-      document.getElementById('modal-total').innerText = total;
-      document.getElementById('cart-modal').style.display = 'block';
+      document.getElementById("modal-total").innerText = total;
+      document.getElementById("cart-modal").style.display = "block";
     }
 
     function hideCart() {
-      document.getElementById('cart-modal').style.display = 'none';
+      document.getElementById("cart-modal").style.display = "none";
     }
 
     function checkout() {
-      alert("Checkout is under development 🚧");
+      alert("Checkout coming soon!");
     }
   </script>
-
 </body>
 </html>
