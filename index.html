@@ -95,8 +95,43 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 </div>
 
 <!-- PRODUCTS -->
+<!-- ✅ Paste this entire section over your current one in index.html -->
+
 <section class="products" id="products">
-  <!-- product template -->
+  <div class="product">
+    <img src="https://cdn.pixabay.com/photo/2018/07/31/20/23/mushrooms-3576037_960_720.jpg" alt="Button Mushrooms" onclick="showDetails('Button Mushrooms', 'https://cdn.pixabay.com/photo/2018/07/31/20/23/mushrooms-3576037_960_720.jpg', 'Classic white button mushrooms.')">
+    <h3>Button Mushrooms</h3>
+    <p>₹60 / 250g</p>
+    <button onclick="addToCart('Button Mushrooms', 60)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="https://cdn.pixabay.com/photo/2021/08/14/20/13/oyster-mushroom-6546060_960_720.jpg" alt="Oyster Mushrooms" onclick="showDetails('Oyster Mushrooms', 'https://cdn.pixabay.com/photo/2021/08/14/20/13/oyster-mushroom-6546060_960_720.jpg', 'Tender and mild flavour.')">
+    <h3>Oyster Mushrooms</h3>
+    <p>₹70 / 250g</p>
+    <button onclick="addToCart('Oyster Mushrooms', 70)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="https://cdn.pixabay.com/photo/2015/05/09/15/14/shiitake-759866_960_720.jpg" alt="Shiitake Mushrooms" onclick="showDetails('Shiitake Mushrooms', 'https://cdn.pixabay.com/photo/2015/05/09/15/14/shiitake-759866_960_720.jpg', 'Rich umami taste.')">
+    <h3>Shiitake Mushrooms</h3>
+    <p>₹90 / 250g</p>
+    <button onclick="addToCart('Shiitake Mushrooms', 90)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Calocybe_indica.jpg" alt="Milky Mushrooms" onclick="showDetails('Milky Mushrooms', 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Calocybe_indica.jpg', 'Soft milky-white caps.')">
+    <h3>Milky Mushrooms</h3>
+    <p>₹80 / 250g</p>
+    <button onclick="addToCart('Milky Mushrooms', 80)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Hericium_erinaceus_Iowa_2.jpg" alt="Lion's Mane">
+    <h3>Lion’s Mane</h3>
+    <p>₹120 / 250g</p>
+    <button onclick="addToCart('Lion’s Mane', 120)">Add to Cart</button>
+  </div>
 </section>
 
 <!-- CART MODAL -->
