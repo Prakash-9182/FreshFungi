@@ -248,7 +248,58 @@ toggle.onclick=()=>{
   localStorage.setItem('ff-dark',document.body.classList.contains('dark'));
 };
 if(localStorage.getItem('ff-dark')==='true') document.body.classList.add('dark');
+
+  
+<script>
+  const products = [
+    {
+      name: "Button Mushrooms",
+      price: 60,
+      img: "https://cdn.pixabay.com/photo/2018/07/31/20/23/mushrooms-3576037_960_720.jpg",
+      info: "Classic white button mushrooms."
+    },
+    {
+      name: "Oyster Mushrooms",
+      price: 70,
+      img: "https://cdn.pixabay.com/photo/2021/08/14/20/13/oyster-mushroom-6546060_960_720.jpg",
+      info: "Tender and mild flavour."
+    },
+    {
+      name: "Shiitake Mushrooms",
+      price: 90,
+      img: "https://cdn.pixabay.com/photo/2015/05/09/15/14/shiitake-759866_960_720.jpg",
+      info: "Rich umami taste."
+    },
+    {
+      name: "Milky Mushrooms",
+      price: 80,
+      img: "https://upload.wikimedia.org/wikipedia/commons/1/1b/Calocybe_indica.jpg",
+      info: "Soft milky-white caps."
+    },
+    {
+      name: "Lion’s Mane",
+      price: 120,
+      img: "https://upload.wikimedia.org/wikipedia/commons/4/49/Hericium_erinaceus_Iowa_2.jpg",
+      info: "Fuzzy, brainy-looking medicinal mushroom."
+    }
+  ];
+
+  const prodWrap = document.querySelector('.products');
+  products.forEach((p, i) => {
+    prodWrap.insertAdjacentHTML('beforeend', `
+      <div class="product">
+        <img src="${p.img}" alt="${p.name}" onclick="showDetails(${i})">
+        <h3>${p.name}</h3>
+        <p>₹${p.price} / 250g</p>
+        Qty: <input type="number" value="1" min="1" id="qty-${i}" />
+        <button onclick="addToCart(${i})">Add to Cart</button>
+      </div>
+    `);
+  });
 </script>
 
+
+  
+</script>
 </body>
 </html>
