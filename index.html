@@ -287,19 +287,17 @@ if(localStorage.getItem('ff-dark')==='true') document.body.classList.add('dark')
   const prodWrap = document.querySelector('.products');
   products.forEach((p, i) => {
     prodWrap.insertAdjacentHTML('beforeend', `
-      <div class="product">
-        <img src="${p.img}" alt="${p.name}" onclick="showDetails(${i})">
-        <h3>${p.name}</h3>
-        <p>₹${p.price} / 250g</p>
-        Qty: <input type="number" value="1" min="1" id="qty-${i}" />
-        <button onclick="addToCart(${i})">Add to Cart</button>
-      </div>
-    `);
+  <div class="product">
+    <img src="${p.img}" alt="${p.name}" onclick="showDetails(${i})">
+    <h3>${p.name}</h3>
+    <p>₹${p.price} / 250g</p>
+    Qty: <input type="number" value="1" min="1" id="qty-${i}" />
+    <button onclick="addToCart(${i})">Add to Cart</button>
+  </div>
+`);
   });
 </script>
 
-
-  
 </script>
 </body>
 </html>
