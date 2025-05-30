@@ -115,11 +115,11 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 <div id="checkout-modal" class="modal">
   <span class="modal-close" onclick="hideCheckout()">✕</span>
   <h3>Place Order</h3>
-  <form onsubmit="confirmOrder(event)">
+  <form onsubmit="Order(event)">
     <input required placeholder="Your Name" id="order-name" style="width:100%;padding:.6rem;margin:.3rem 0"/>
     <textarea required placeholder="Delivery Address" id="order-address" style="width:100%;padding:.6rem;margin:.3rem 0;height:70px"></textarea>
     <p>Total ₹<span id="final-total">0</span></p>
-    <button type="submit" style="background:var(--green);color:#fff;padding:.6rem 1.2rem;border:none;cursor:pointer">Confirm Order</button>
+    <button type="submit" style="background:var(--green);color:#fff;padding:.6rem 1.2rem;border:none;cursor:pointer"> Order</button>
   </form>
 </div>
 
@@ -258,6 +258,7 @@ function showCheckout(){
   document.getElementById('checkout-modal').style.display='block';
 }
 function hideCheckout(){document.getElementById('checkout-modal').style.display='none';}
+<script>
 function confirmOrder(e){
   e.preventDefault();
   const name = document.getElementById('order-name').value.trim();
@@ -267,26 +268,31 @@ function confirmOrder(e){
     return;
   }
 
-  // Show confirmation message below cart
+  // ✅ Show success message
   const msgDiv = document.createElement('div');
   msgDiv.textContent = `✅ Thank you ${name}, your order has been placed!`;
   msgDiv.style.cssText = "text-align:center;margin-top:1rem;color:green;font-weight:bold;";
-  document.querySelector('body').appendChild(msgDiv);
+  
+  const footer = document.querySelector("footer");
+  if (footer) footer.insertAdjacentElement("beforebegin", msgDiv);
+  else document.body.appendChild(msgDiv);
 
   // Clear cart and reset quantity inputs
   cart = [];
   updateCart();
   document.querySelectorAll('.qty-wrap input').forEach(input => input.value = 1);
 
-  // Hide modal
+  // Hide checkout modal
   hideCheckout();
 
   // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Remove confirmation message after 4 seconds
+  // Remove message after 4 seconds
   setTimeout(() => msgDiv.remove(), 4000);
 }
+</script>
+
 
 
 /* ---------- DARK MODE ---------- */
