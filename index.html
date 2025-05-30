@@ -141,12 +141,12 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 <section id="contact">
   <h2>Contact Us</h2>
   <p>Have questions or bulk inquiries? Send us a message!</p>
-  <form action="https://formspree.io/f/meogdldl" method="POST">
-    <input name="name" required placeholder="Your Name"/>
-    <input type="email" name="email" required placeholder="Your Email"/>
-    <textarea name="message" rows="5" required placeholder="Your Message"></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+  <form action="https://formspree.io/f/meogdldl" method="POST" onsubmit="prepareOrder(event)">
+  <input name="customer" placeholder="Your Name" required id="order-name" />
+  <textarea name="address" placeholder="Delivery Address" required id="order-address"></textarea>
+  <input type="hidden" name="order" id="order-summary" />
+  <button type="submit" style="background:var(--green);color:#fff;padding:.6rem 1.2rem;border:none;cursor:pointer">Send Order</button>
+</form>
 </section>
 
 <footer>&copy; 2025 FreshFungi. All rights reserved.</footer>
