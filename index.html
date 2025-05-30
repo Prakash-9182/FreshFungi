@@ -260,12 +260,34 @@ function showCheckout(){
 function hideCheckout(){document.getElementById('checkout-modal').style.display='none';}
 function confirmOrder(e){
   e.preventDefault();
-  const name=document.getElementById('order-name').value.trim();
-  const addr=document.getElementById('order-address').value.trim();
-  if(!name||!addr){alert('Please fill in all fields');return;}
-  alert(`Thanks ${name}! Your order is confirmed 🎉`);
-  cart=[];updateCart();hideCheckout();
+  const name = document.getElementById('order-name').value.trim();
+  const addr = document.getElementById('order-address').value.trim();
+  if (!name || !addr) {
+    alert('Please fill in all fields');
+    return;
+  }
+
+  // Show confirmation message below cart
+  const msgDiv = document.createElement('div');
+  msgDiv.textContent = `✅ Thank you ${name}, your order has been placed!`;
+  msgDiv.style.cssText = "text-align:center;margin-top:1rem;color:green;font-weight:bold;";
+  document.querySelector('body').appendChild(msgDiv);
+
+  // Clear cart and reset quantity inputs
+  cart = [];
+  updateCart();
+  document.querySelectorAll('.qty-wrap input').forEach(input => input.value = 1);
+
+  // Hide modal
+  hideCheckout();
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Remove confirmation message after 4 seconds
+  setTimeout(() => msgDiv.remove(), 4000);
 }
+
 
 /* ---------- DARK MODE ---------- */
 const toggle=document.getElementById('toggle-dark');
