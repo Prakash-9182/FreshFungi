@@ -155,7 +155,13 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 <a id="wa-btn" href="https://wa.me/9182591543?text=Hi%20FreshFungi%21" target="_blank">💬</a>
 
 <!-- ----------  JS  ---------- -->
-<script>
+function prepareOrder(e){
+  const summary = cart.map(c => `${c.name} x${c.qty}`).join(', ');
+  const total = cart.reduce((t, c) => t + c.price * c.qty, 0);
+  const finalText = `Order: ${summary} | Total: ₹${total}`;
+  document.getElementById("order-summary").value = finalText;
+}
+ <script>
 /* ---------- PRODUCT DATA ---------- */
 const products = [
   {
