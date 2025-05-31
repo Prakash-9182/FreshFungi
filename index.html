@@ -134,6 +134,19 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
     padding: 1rem;
   }
 }
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: gold;
+  color: #333;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
   
 </style>
 </head>
@@ -315,18 +328,20 @@ const products = [
 
 /* ---------- RENDER PRODUCTS ---------- */
 const prodWrap=document.querySelector('.products');
-products.forEach((p,i)=>{
-  prodWrap.insertAdjacentHTML('beforeend',`
-  <div class="product">
-    <img src="${p.img}" alt="${p.name}" onclick="showDetails(${i})">
-    <h3>${p.name}</h3>
-    <p>₹${p.price} / 250g</p>
-    <div class="qty-wrap">
-      <label>Qty:</label>
-      <input type="number" id="qty-${i}" value="1" min="1">
-    </div>
-    <button onclick="addToCart(${i})">Add to Cart</button>
-  </div>`);
+products.forEach((p, i) => {
+  const badge = i === 0 ? `<div class="badge">⭐ Best Seller</div>` : "";
+  prodWrap.insertAdjacentHTML('beforeend', `
+    <div class="product">
+      ${badge}
+      <img src="${p.img}" alt="${p.name}" onclick="showDetails(${i})">
+      <h3>${p.name}</h3>
+      <p>₹${p.price} / 250g</p>
+      <div class="qty-wrap">
+        <label>Qty:</label>
+        <input type="number" id="qty-${i}" value="1" min="1">
+      </div>
+      <button onclick="addToCart(${i})">Add to Cart</button>
+    </div>`);
 });
 
 /* ---------- CART LOGIC ---------- */
@@ -485,7 +500,5 @@ function sendEmailOrder() {
 
    
 </script>
-
-
 </body>
 </html>
