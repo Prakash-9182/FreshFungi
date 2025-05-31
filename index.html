@@ -301,8 +301,8 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 <section id="contact">
   <h2>Contact Us</h2>
   <p>Have questions or bulk inquiries? Send us a message!</p>
-  <form action="https://formspree.io/f/meogdldl" method="POST" onsubmit="goToThankYou()">
-  <input name="customer" placeholder="Your Name" required id="order-name" />
+  <form action="https://formspree.io/f/meogdldl" method="POST">
+  <input type="hidden" name="_redirect" value="https://prakash-9182.github.io/FreshFungi/thankyou.html">
   <textarea name="address" placeholder="Delivery Address" required id="order-address"></textarea>
   <input type="hidden" name="order" id="order-summary" />
   <button type="submit" style="background:var(--green);color:#fff;padding:.6rem 1.2rem;border:none;cursor:pointer">Send Order</button>
