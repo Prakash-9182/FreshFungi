@@ -111,20 +111,32 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 <!-- PRODUCT DETAILS MODAL -->
 <div id="detail-modal" class="modal"></div>
   
-<!-- CHECKOUT MODAL (WhatsApp Checkout) -->
+<!-- CHECKOUT MODAL – Dual Option -->
 <div id="checkout-modal" class="modal">
   <span class="modal-close" onclick="hideCheckout()">✕</span>
-  <h3>Place Order via WhatsApp</h3>
-  <form onsubmit="sendWhatsAppOrder(event)">
-    <input required id="wa-name" placeholder="Your Name" />
-    <textarea required id="wa-address" placeholder="Delivery Address" rows="3"></textarea>
+  <h3>Place Order</h3>
+  <form id="dual-checkout-form" onsubmit="return false;">
+    <input required id="checkout-name" placeholder="Your Name" />
+    <textarea required id="checkout-address" placeholder="Delivery Address" rows="3"></textarea>
     <p>Total ₹<span id="final-total">0</span></p>
-    <button type="submit" style="background:var(--green);color:#fff;padding:.6rem 1.4rem;border:none;cursor:pointer">
-      Send via WhatsApp
-    </button>
+
+    <!-- Hidden for email -->
+    <input type="hidden" name="order" id="order-summary" />
+
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem;">
+      <button type="button" onclick="sendWhatsAppOrder()"
+        style="background:#25d366;color:white;padding:.6rem 1.2rem;border:none;border-radius:6px;cursor:pointer">
+        Send via WhatsApp
+      </button>
+
+      <button type="submit"
+        onclick="sendEmailOrder()"
+        style="background:var(--green);color:white;padding:.6rem 1.2rem;border:none;border-radius:6px;cursor:pointer">
+        Send via Email
+      </button>
+    </div>
   </form>
 </div>
-
   
 <!-- WHY CHOOSE US -->
 <section style="background:#f0fff4;padding:2rem 1rem;text-align:center">
@@ -348,5 +360,68 @@ function sendWhatsAppOrder(e){
 }
    
 </script>
+
+function sendWhatsAppOrder() {
+  const name = document.getElementById('checkout-name').value.trim();
+  const addr = document.getElementById('checkout-address').value.trim();
+
+  if (!name || !addr) {
+    alert("Please fill in all fields");
+    return;
+  }
+
+  const summary = cart.map(c => `- ${c.qty}x ${c.name}`).join('%0A');
+  const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+  const msg = `Hi, I'm ${name}%0AI want to order:%0A${summary}%0A%0ATotal: ₹${total}%0ADeliver to: ${addr}`;
+
+  window.open(`https://wa.me/9182591543?text=${msg}`, '_blank');
+
+  cart = [];
+  updateCart();
+  hideCheckout();
+}
+
+function sendEmailOrder() {
+  const name = document.getElementById('checkout-name').value.trim();
+  const addr = document.getElementById('checkout-address').value.trim();
+
+  if (!name || !addr) {
+    alert("Please fill in all fields");
+    return;
+  }
+
+  const summary = cart.map(c => `${c.name} x${c.qty}`).join(', ');
+  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  document.getElementById("order-summary").value =
+    `Order: ${summary} | Total: ₹${total}`;
+
+  // Create temp form to submit to Formspree
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://formspree.io/f/meogdldl';
+
+  const nameField = document.createElement('input');
+  nameField.name = 'customer';
+  nameField.value = name;
+  form.appendChild(nameField);
+
+  const addrField = document.createElement('textarea');
+  addrField.name = 'address';
+  addrField.value = addr;
+  form.appendChild(addrField);
+
+  const orderField = document.createElement('input');
+  orderField.name = 'order';
+  orderField.value = document.getElementById('order-summary').value;
+  form.appendChild(orderField);
+
+  document.body.appendChild(form);
+  form.submit();
+
+  cart = [];
+  updateCart();
+  hideCheckout();
+}
+  
 </body>
 </html>
