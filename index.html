@@ -110,18 +110,39 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 
 <!-- PRODUCT DETAILS MODAL -->
 <div id="detail-modal" class="modal"></div>
-
-<!-- CHECKOUT MODAL -->
+  
+<!-- CHECKOUT MODAL (Formspree) -->
 <div id="checkout-modal" class="modal">
   <span class="modal-close" onclick="hideCheckout()">✕</span>
   <h3>Place Order</h3>
-  <form onsubmit="confirmOrder(event)">
-    <input required placeholder="Your Name" id="order-name" style="width:100%;padding:.6rem;margin:.3rem 0"/>
-    <textarea required placeholder="Delivery Address" id="order-address" style="width:100%;padding:.6rem;margin:.3rem 0;height:70px"></textarea>
+
+  <!-- ✅ this sends the e-mail -->
+  <form action="https://formspree.io/f/meogdldl"
+        method="POST"
+        onsubmit="prepareOrder(event)">
+    <input name="customer"
+           id="checkout-name"
+           placeholder="Your Name"
+           required />
+
+    <textarea name="address"
+              id="checkout-address"
+              placeholder="Delivery Address"
+              required
+              rows="3"></textarea>
+
+    <!-- hidden field populated by JS -->
+    <input type="hidden" name="order" id="order-summary" />
+
     <p>Total ₹<span id="final-total">0</span></p>
-    <button type="submit" style="background:var(--green);color:#fff;padding:.6rem 1.2rem;border:none;cursor:pointer">Confirm Order</button>
+
+    <button type="submit"
+            style="background:var(--green);color:#fff;padding:.6rem 1.4rem;border:none;cursor:pointer">
+      Send Order
+    </button>
   </form>
 </div>
+
 
 <!-- ABOUT -->
 <section id="about">
@@ -280,7 +301,19 @@ toggle.onclick=()=>{
   localStorage.setItem('ff-dark',document.body.classList.contains('dark'));
 };
 if(localStorage.getItem('ff-dark')==='true') document.body.classList.add('dark');
-</script>
 
+/* ---------- FORMSPREE CHECKOUT ---------- */
+function prepareOrder(e){
+  const summary = cart.map(c => `${c.name} x${c.qty}`).join(', ');
+  const total   = cart.reduce((s,c) => s + c.price*c.qty, 0);
+
+  document.getElementById('order-summary').value =
+      `Order: ${summary} | Total: ₹${total}`;
+
+  // Let form submit normally to Formspree
+  setTimeout(() => { cart=[]; updateCart(); }, 1000);
+}
+   
+</script>
 </body>
 </html>
