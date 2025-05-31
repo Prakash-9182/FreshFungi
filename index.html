@@ -6,72 +6,50 @@
 <title>FreshFungi – Mushroom Store</title>
 
 <style>
-:root{
-  --green:#4CAF50;
-  --green-dark:#388E3C;
-  --bg:#f4f4f4;
-  --card:#ffffff;
-  --text:#333;
+/* your existing CSS above... */
+
+@media screen and (max-width: 600px) {
+  .products {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .product {
+    width: 90%;
+    margin: 1rem 0;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #cart-bar {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .modal {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  #wa-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  header img {
+    height: 60px;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+  }
 }
-.dark{
-  --bg:#1f1f1f;
-  --card:#2b2b2b;
-  --text:#e8e8e8;
-}
-*{box-sizing:border-box;}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);transition:background .3s,color .3s}
-header{background:var(--green);padding:1rem 0;text-align:center;color:#fff}
-.header-wrap{display:flex;flex-direction:column;align-items:center}
-header img{height:80px;border-radius:18px;margin-bottom:.5rem}
-header h1{margin:0;font-size:2rem}
-header p{margin:0;font-size:.9rem;color:#f1f1f1}
-
-nav {
-  background: var(--green-dark);
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: .8rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-nav a{color:#fff;text-decoration:none;font-weight:bold}
-nav a:hover{text-decoration:underline}
-
-#toggle-dark{position:absolute;right:1rem;top:1rem;background:transparent;border:1px solid #fff;color:#fff;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:.8rem}
-
-#cart-bar{padding:.6rem 1rem;text-align:right;background:#eafbe7}
-#cart-bar button{margin-left:8px;padding:4px 10px;cursor:pointer}
-
-.products{display:flex;flex-wrap:wrap;justify-content:center;padding:2rem}
-.product{background:var(--card);border-radius:12px;box-shadow:0 4px 8px rgb(0 0 0 / .08);margin:1rem;padding:1rem;width:230px;text-align:center;transition:transform .15s}
-.product:hover{transform:translateY(-4px)}
-.product img{width:100%;height:150px;object-fit:cover;border-radius:8px;cursor:pointer}
-.product h3{margin:.6rem 0 .3rem}
-.product p{margin:.2rem 0}
-.qty-wrap{display:flex;justify-content:center;align-items:center;gap:8px;margin:.4rem 0}
-.qty-wrap input{width:55px;padding:4px;text-align:center}
-
-.product button{background:var(--green);color:#fff;padding:10px 22px;border:none;border-radius:20px;cursor:pointer;font-size:.95rem;font-weight:bold}
-.product button:hover{background:#45a049}
-
-.modal{display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--card);border:2px solid var(--green);border-radius:10px;padding:20px;z-index:1000;max-width:340px;width:90%;color:var(--text)}
-.modal h3{margin-top:0}
-.modal-close{position:absolute;right:8px;top:4px;font-size:20px;cursor:pointer}
-
-#cart-items li{display:flex;justify-content:space-between;margin:4px 0}
-
-section{padding:2rem;text-align:center}
-#about{background:#e8f5e9}
-#contact form{max-width:500px;margin:auto}
-#contact input,#contact textarea{width:100%;padding:.6rem;margin:.4rem 0;border:1px solid #ccc;border-radius:5px}
-#contact button{background:var(--green);color:#fff;padding:.7rem 1.5rem;border:none;cursor:pointer}
-#contact button:hover{background:#45a049}
-
-footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem}
-
-#wa-btn{position:fixed;right:18px;bottom:18px;background:#25d366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;text-decoration:none;box-shadow:0 4px 6px rgba(0,0,0,.2);z-index:900}
+</style>
 
 </style>
 </head>
