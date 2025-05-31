@@ -325,35 +325,8 @@ function prepareOrder(e){
   // Let form submit normally to Formspree
   setTimeout(() => { cart=[]; updateCart(); }, 1000);
 }
-function sendWhatsAppOrder(e){
-  e.preventDefault();
-  const name = document.getElementById('wa-name').value.trim();
-  const addr = document.getElementById('wa-address').value.trim();
 
-  if (!name || !addr) {
-    alert("Please fill in all fields");
-    return;
-  }
-
-  const summary = cart.map(c => `- ${c.qty}x ${c.name}`).join('%0A');
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-  const message = `Hi, I'm ${name}%0A` +
-                  `I want to order:%0A${summary}%0A%0A` +
-                  `Total: ₹${total}%0A` +
-                  `Deliver to: ${addr}`;
-
-  const phone = "9182591543"; // your WhatsApp number
-  const url = `https://wa.me/${phone}?text=${message}`;
-
-  window.open(url, '_blank');
-
-  // Clear cart
-  cart = [];
-  updateCart();
-  hideCheckout();
-}
- function sendWhatsAppOrder() {
+function sendWhatsAppOrder() {
   const name = document.getElementById('checkout-name').value.trim();
   const addr = document.getElementById('checkout-address').value.trim();
   if (!name || !addr) {
@@ -412,68 +385,6 @@ function sendEmailOrder() {
   hideCheckout();
 }
 
-function sendWhatsAppOrder() {
-  const name = document.getElementById('checkout-name').value.trim();
-  const addr = document.getElementById('checkout-address').value.trim();
-
-  if (!name || !addr) {
-    alert("Please fill in all fields");
-    return;
-  }
-
-  const summary = cart.map(c => `- ${c.qty}x ${c.name}`).join('%0A');
-  const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
-  const msg = `Hi, I'm ${name}%0AI want to order:%0A${summary}%0A%0ATotal: ₹${total}%0ADeliver to: ${addr}`;
-
-  window.open(`https://wa.me/9182591543?text=${msg}`, '_blank');
-
-  cart = [];
-  updateCart();
-  hideCheckout();
-}
-
-function sendEmailOrder() {
-  const name = document.getElementById('checkout-name').value.trim();
-  const addr = document.getElementById('checkout-address').value.trim();
-
-  if (!name || !addr) {
-    alert("Please fill in all fields");
-    return;
-  }
-
-  const summary = cart.map(c => `${c.name} x${c.qty}`).join(', ');
-  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
-  document.getElementById("order-summary").value =
-    `Order: ${summary} | Total: ₹${total}`;
-
-  // Create temp form to submit to Formspree
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = 'https://formspree.io/f/meogdldl';
-
-  const nameField = document.createElement('input');
-  nameField.name = 'customer';
-  nameField.value = name;
-  form.appendChild(nameField);
-
-  const addrField = document.createElement('textarea');
-  addrField.name = 'address';
-  addrField.value = addr;
-  form.appendChild(addrField);
-
-  const orderField = document.createElement('input');
-  orderField.name = 'order';
-  orderField.value = document.getElementById('order-summary').value;
-  form.appendChild(orderField);
-
-  document.body.appendChild(form);
-  form.submit();
-
-  cart = [];
-  updateCart();
-  hideCheckout();
-}
-  
    
 </script>
 
