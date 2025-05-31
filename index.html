@@ -331,7 +331,7 @@ const prodWrap=document.querySelector('.products');
 products.forEach((p, i) => {
   // Logic to control Best Seller badge
 // Update product names inside bestSellers[] as needed
-const bestSellers = ["Shiitake Mushrooms"]; // ← Change this list anytime!
+const bestSellers = ["Button Mushrooms"]; // ← Change this list anytime!
 const badge = bestSellers.includes(p.name) ? `<div class="badge">⭐ Best Seller</div>` : "";
   prodWrap.insertAdjacentHTML('beforeend', `
     <div class="product">
