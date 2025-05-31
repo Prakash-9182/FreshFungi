@@ -26,7 +26,16 @@ header img{height:80px;border-radius:18px;margin-bottom:.5rem}
 header h1{margin:0;font-size:2rem}
 header p{margin:0;font-size:.9rem;color:#f1f1f1}
 
-nav{background:var(--green-dark);display:flex;justify-content:center;gap:2rem;padding:.8rem}
+nav {
+  background: var(--green-dark);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: .8rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 nav a{color:#fff;text-decoration:none;font-weight:bold}
 nav a:hover{text-decoration:underline}
 
