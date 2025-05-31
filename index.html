@@ -301,7 +301,7 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 <section id="contact">
   <h2>Contact Us</h2>
   <p>Have questions or bulk inquiries? Send us a message!</p>
-  <form action="https://formspree.io/f/meogdldl" method="POST" onsubmit="prepareOrder(event)">
+  <form action="https://formspree.io/f/meogdldl" method="POST" onsubmit="goToThankYou()">
   <input name="customer" placeholder="Your Name" required id="order-name" />
   <textarea name="address" placeholder="Delivery Address" required id="order-address"></textarea>
   <input type="hidden" name="order" id="order-summary" />
@@ -536,6 +536,12 @@ function sendEmailOrder() {
   cart = [];
   updateCart();
   hideCheckout();
+}
+   
+function goToThankYou() {
+  setTimeout(() => {
+    window.location.href = "thankyou.html";
+  }, 100);
 }
 
    
