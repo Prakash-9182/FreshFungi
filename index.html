@@ -505,46 +505,39 @@ function sendWhatsAppOrder() {
   hideCheckout();
 }
 
-function sendEmailOrder() {
+<script>
+function sendEmailOrder () {
+  /* 1 – gather data */
   const name = document.getElementById('checkout-name').value.trim();
   const addr = document.getElementById('checkout-address').value.trim();
-  if (!name || !addr) { alert("Please fill in all fields"); return; }
+  if (!name || !addr) { alert('Please fill in all fields'); return; }
 
   const summary = cart.map(c => `${c.name} x${c.qty}`).join(', ');
-  const total   = cart.reduce((s,c) => s + c.price*c.qty, 0);
+  const total   = cart.reduce((t,c)=>t+c.price*c.qty,0);
   const order   = `Order: ${summary} | Total: ₹${total}`;
 
-  /* build temp form for Formspree */
-  const form = document.createElement('form');
-  form.action = 'https://formspree.io/f/meogdldl';
-  form.method = 'POST';
+  /* 2 – build FormData for Formspree */
+  const fd = new FormData();
+  fd.append('customer', name);
+  fd.append('address',  addr);
+  fd.append('order',    order);
 
-  const addField = (n,v,type='input') => {
-    const f = document.createElement(type);
-    f.name  = n;
-    f.value = v;
-    form.appendChild(f);
-  };
-  addField('customer', name);
-  addField('address' , addr , 'textarea');
-  addField('order'   , order);
-  /* ✅ tell Formspree where to redirect */
-  addField('_redirect','https://prakash-9182.github.io/FreshFungi/thankyou.html');
-
-  document.body.appendChild(form);
-  form.submit();
-
-  cart=[]; updateCart(); hideCheckout();
+  /* 3 – POST via fetch, THEN redirect yourself */
+  fetch('https://formspree.io/f/meogdldl', {
+      method: 'POST',
+      headers: { 'Accept':'application/json' },
+      body: fd
+  })
+  .then(() => {
+      /* clear cart & redirect */
+      cart = []; updateCart(); hideCheckout();
+      window.location.href = 'thankyou.html';   // ✅ your custom page
+  })
+  .catch(() => {
+      alert('Couldn’t send e-mail. Please use WhatsApp option.');
+  });
 }
-
-   
-function goToThankYou() {
-  setTimeout(() => {
-    window.location.href = "thankyou.html";
-  }, 100);
-}
-
-   
 </script>
+
 </body>
 </html>
