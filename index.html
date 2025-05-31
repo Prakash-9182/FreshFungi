@@ -111,37 +111,20 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
 <!-- PRODUCT DETAILS MODAL -->
 <div id="detail-modal" class="modal"></div>
   
-<!-- CHECKOUT MODAL (Formspree) -->
+<!-- CHECKOUT MODAL (WhatsApp Checkout) -->
 <div id="checkout-modal" class="modal">
   <span class="modal-close" onclick="hideCheckout()">✕</span>
-  <h3>Place Order</h3>
-
-  <!-- ✅ this sends the e-mail -->
-  <form action="https://formspree.io/f/meogdldl"
-        method="POST"
-        onsubmit="prepareOrder(event)">
-    <input name="customer"
-           id="checkout-name"
-           placeholder="Your Name"
-           required />
-
-    <textarea name="address"
-              id="checkout-address"
-              placeholder="Delivery Address"
-              required
-              rows="3"></textarea>
-
-    <!-- hidden field populated by JS -->
-    <input type="hidden" name="order" id="order-summary" />
-
+  <h3>Place Order via WhatsApp</h3>
+  <form onsubmit="sendWhatsAppOrder(event)">
+    <input required id="wa-name" placeholder="Your Name" />
+    <textarea required id="wa-address" placeholder="Delivery Address" rows="3"></textarea>
     <p>Total ₹<span id="final-total">0</span></p>
-
-    <button type="submit"
-            style="background:var(--green);color:#fff;padding:.6rem 1.4rem;border:none;cursor:pointer">
-      Send Order
+    <button type="submit" style="background:var(--green);color:#fff;padding:.6rem 1.4rem;border:none;cursor:pointer">
+      Send via WhatsApp
     </button>
   </form>
 </div>
+
   
 <!-- WHY CHOOSE US -->
 <section style="background:#f0fff4;padding:2rem 1rem;text-align:center">
@@ -334,6 +317,34 @@ function prepareOrder(e){
 
   // Let form submit normally to Formspree
   setTimeout(() => { cart=[]; updateCart(); }, 1000);
+}
+function sendWhatsAppOrder(e){
+  e.preventDefault();
+  const name = document.getElementById('wa-name').value.trim();
+  const addr = document.getElementById('wa-address').value.trim();
+
+  if (!name || !addr) {
+    alert("Please fill in all fields");
+    return;
+  }
+
+  const summary = cart.map(c => `- ${c.qty}x ${c.name}`).join('%0A');
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  const message = `Hi, I'm ${name}%0A` +
+                  `I want to order:%0A${summary}%0A%0A` +
+                  `Total: ₹${total}%0A` +
+                  `Deliver to: ${addr}`;
+
+  const phone = "9182591543"; // your WhatsApp number
+  const url = `https://wa.me/${phone}?text=${message}`;
+
+  window.open(url, '_blank');
+
+  // Clear cart
+  cart = [];
+  updateCart();
+  hideCheckout();
 }
    
 </script>
