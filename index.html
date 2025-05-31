@@ -348,6 +348,7 @@ const badge = bestSellers.includes(p.name) ? `<div class="badge">⭐ Best Seller
       <img src="${p.img}" alt="${p.name}" onclick="showDetails(${i})">
       <h3>${p.name}</h3>
       <p>₹${p.price} / 250g</p>
+      <small style="display:block;color:#666;font-size:0.85rem;margin-bottom:0.5rem;">🚚 Delivery in 24–48 hours</small>
       <div class="qty-wrap">
         <label>Qty:</label>
         <input type="number" id="qty-${i}" value="1" min="1">
