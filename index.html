@@ -508,42 +508,35 @@ function sendWhatsAppOrder() {
 function sendEmailOrder() {
   const name = document.getElementById('checkout-name').value.trim();
   const addr = document.getElementById('checkout-address').value.trim();
-  if (!name || !addr) {
-    alert("Please fill in all fields");
-    return;
-  }
+  if (!name || !addr) { alert("Please fill in all fields"); return; }
 
   const summary = cart.map(c => `${c.name} x${c.qty}`).join(', ');
-  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
-  const order = `Order: ${summary} | Total: ₹${total}`;
-  document.getElementById('order-summary').value = order;
+  const total   = cart.reduce((s,c) => s + c.price*c.qty, 0);
+  const order   = `Order: ${summary} | Total: ₹${total}`;
 
+  /* build temp form for Formspree */
   const form = document.createElement('form');
   form.action = 'https://formspree.io/f/meogdldl';
   form.method = 'POST';
 
-  const nameField = document.createElement('input');
-  nameField.name = 'customer';
-  nameField.value = name;
-  form.appendChild(nameField);
-
-  const addrField = document.createElement('textarea');
-  addrField.name = 'address';
-  addrField.value = addr;
-  form.appendChild(addrField);
-
-  const orderField = document.createElement('input');
-  orderField.name = 'order';
-  orderField.value = order;
-  form.appendChild(orderField);
+  const addField = (n,v,type='input') => {
+    const f = document.createElement(type);
+    f.name  = n;
+    f.value = v;
+    form.appendChild(f);
+  };
+  addField('customer', name);
+  addField('address' , addr , 'textarea');
+  addField('order'   , order);
+  /* ✅ tell Formspree where to redirect */
+  addField('_redirect','https://prakash-9182.github.io/FreshFungi/thankyou.html');
 
   document.body.appendChild(form);
   form.submit();
 
-  cart = [];
-  updateCart();
-  hideCheckout();
+  cart=[]; updateCart(); hideCheckout();
 }
+
    
 function goToThankYou() {
   setTimeout(() => {
