@@ -164,7 +164,14 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
   </div>
 </section>
 
-
+<!-- TESTIMONIALS -->
+<section style="background:#fff8e1;padding:2rem;text-align:center">
+  <h2>What Our Customers Say</h2>
+  <div id="testimonial-box" style="font-size:1.1rem;margin-top:1rem;max-width:600px;margin:auto;font-style:italic;color:#555">
+    "Amazing quality and fast delivery!"
+  </div>
+</section>
+ 
 <!-- ABOUT -->
 <section id="about">
   <h2>About Us</h2>
@@ -322,6 +329,21 @@ toggle.onclick=()=>{
   localStorage.setItem('ff-dark',document.body.classList.contains('dark'));
 };
 if(localStorage.getItem('ff-dark')==='true') document.body.classList.add('dark');
+
+/* ---------- TESTIMONIAL SLIDER ---------- */
+const testimonials = [
+  "“Amazing quality and fast delivery!”",
+  "“Best mushrooms I've ever bought — so fresh!”",
+  "“Loved the service and fast response!”",
+  "“Healthy, tasty and straight from the farm.”"
+];
+
+let tIndex = 0;
+setInterval(() => {
+  tIndex = (tIndex + 1) % testimonials.length;
+  document.getElementById("testimonial-box").textContent = testimonials[tIndex];
+}, 4000);
+
 
 /* ---------- FORMSPREE CHECKOUT ---------- */
 function prepareOrder(e){
