@@ -147,6 +147,15 @@ footer{text-align:center;padding:1rem;background:#333;color:#fff;margin-top:2rem
   font-weight: bold;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
+
+#cart-items li {
+  background: #f9f9f9;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
   
 </style>
 </head>
@@ -350,11 +359,15 @@ const badge = bestSellers.includes(p.name) ? `<div class="badge">⭐ Best Seller
 /* ---------- CART LOGIC ---------- */
 let cart=[];
 function addToCart(idx){
-  const qty=+document.getElementById(`qty-${idx}`).value||1;
-  const item=products[idx];
-  cart.push({name:item.name,price:item.price,qty});
+  const qty = +document.getElementById(`qty-${idx}`).value || 1;
+  const item = products[idx];
+  cart.push({ name: item.name, price: item.price, qty });
   updateCart();
+
+  // ✅ Reset the quantity back to 1
+  document.getElementById(`qty-${idx}`).value = 1;
 }
+
 function updateCart(){
   const count=cart.reduce((t,c)=>t+c.qty,0);
   const total=cart.reduce((t,c)=>t+c.price*c.qty,0);
